@@ -149,10 +149,8 @@ class PageviewsClient:
                 output = output_monthly
 
             return output
-        except:
-            print('ERROR while fetching and parsing ' + str(urls))
-            traceback.print_exc()
-            raise
+        except Exception as ex:
+            raise Exception('ERROR while fetching and parsing ' + str(urls), ex)
 
     def project_views(
             self, projects,
@@ -242,10 +240,8 @@ class PageviewsClient:
                     'The pageview API returned nothing useful at: {}'.format(urls)
                 )
             return output
-        except:
-            print('ERROR while fetching and parsing ' + str(urls))
-            traceback.print_exc()
-            raise
+        except Exception as ex:
+            raise Exception('ERROR while fetching and parsing ' + str(urls), ex)
 
     def top_articles(
             self, project, access='all-access',
@@ -295,10 +291,8 @@ class PageviewsClient:
                 r = result['items'][0]['articles']
                 r.sort(key=lambda x: x['rank'])
                 return r[0:(limit)]
-        except:
-            print('ERROR while fetching or parsing ' + url)
-            traceback.print_exc()
-            raise
+        except Exception as ex:
+            raise Exception('ERROR while fetching or parsing ' + url, ex)
 
         raise Exception(
             'The pageview API returned nothing useful at: {}'.format(url)
